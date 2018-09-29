@@ -26,4 +26,12 @@ describe("The strobe tuner", function() {
     expect(strobeTuner.context.state).toBe("closed");
   });
   
+  it("can hear", function(){
+    var args = strobeTuner.handleEvent.arguments;
+    var data = args[0].inputBuffer.getChannelData(0);
+    var min = Math.min.apply(Math, data);
+    var max = Math.max.apply(Math, data);
+    expect(min).toBeLessThan(max);
+  })
+  
 });

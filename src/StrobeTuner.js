@@ -9,9 +9,11 @@ StrobeTuner.prototype
   
   navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream) {
     that.stream = stream;
-    analyser = that.context.createScriptProcessor(1024,1,1);
-    source = that.context.createMediaStreamSource(stream);
+    var analyser = that.context.createScriptProcessor(1024,1,1);
+    var source = that.context.createMediaStreamSource(stream);
     source.connect(analyser);
+    // Bugfix: Connect analyzer node to AudioContext.destination
+    // or else it won't start. Also mute it.
     var mute = that.context.createGain();
     mute.gain.value = 0;
     analyser.connect(mute);
