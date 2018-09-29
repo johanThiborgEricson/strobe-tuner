@@ -19,7 +19,7 @@ describe("The strobe tuner", function() {
     expect(strobeTuner.handleEvent).toHaveBeenCalled();
   });
   
-  it("can stor listening to the microphone", function() {
+  it("can stop listening to the microphone", function() {
     strobeTuner.stopMicrophone();
     
     expect(strobeTuner.stream.getTracks()[0].readyState).toBe("ended");
